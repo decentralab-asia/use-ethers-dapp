@@ -1,0 +1,45 @@
+{
+  "name": "use-ethers-dapp",
+  "version": "0.1.0",
+  "description": "Use Ethers Dapp",
+  "main": "./lib/cjs/index.js",
+  "exports": {
+    ".": "./lib/cjs/index.js",
+    "./submodule": "./lib/cjs/query/index.js"
+  },
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "repository": "https://github.com/decentralab-asia/use-ethers-dapp",
+  "author": "andoan.eth",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "@web3-react/abstract-connector": "^6.0.7",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletconnect-connector": "6.2.8",
+    "ethers": "^5.6.4",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "@web3-react/abstract-connector": "^6.0.7",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletconnect-connector": "6.2.8",
+    "ethers": "^5.6.4",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {}
+}
