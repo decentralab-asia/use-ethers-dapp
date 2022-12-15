@@ -1,26 +1,24 @@
 // Imports below migrated from Exchange useContract.ts
-import { Contract } from "@ethersproject/contracts";
-import { Web3Provider } from "@ethersproject/providers";
-import { useMemo } from "react";
+import { Contract } from '@ethersproject/contracts'
+import { Web3Provider } from '@ethersproject/providers'
 
-import useActiveWeb3React from "useActiveWeb3React";
-import {
-  ContractInfo,
-  getContract,
-  getProviderOrSigner,
-} from "utils/contracts";
-import { getSimpleRpcProvider } from "utils/getRpcUrl";
+import { useMemo } from 'react'
+
+import useActiveWeb3React from './useActiveWeb3React'
+import { ContractInfo, getContract, getProviderOrSigner } from './utils/contracts'
+import { getSimpleRpcProvider } from './utils/getRpcUrl'
+import { WalletProviderError } from './errors'
 
 export function useSimpleContract<T extends Contract = Contract>({
   contract,
-  chainId,
+  chainId
 }: {
-  contract: ContractInfo;
-  chainId: number;
+  contract: ContractInfo
+  chainId: number
 }): T {
   return useMemo(() => {
-    return getContract(contract, getSimpleRpcProvider(chainId));
-  }, [contract, chainId]) as T;
+    return getContract(contract, getSimpleRpcProvider(chainId))
+  }, [contract, chainId]) as T
 }
 
 // returns null on errors
@@ -29,38 +27,20 @@ export function useContract<T extends Contract = Contract>({
   contract,
   withSignerIfPossible = true,
   account,
-  library,
+  library
 }: {
-  contract: ContractInfo;
-  withSignerIfPossible?: boolean;
-  account?: string;
-  library?: Web3Provider;
+  contract: ContractInfo
+  withSignerIfPossible?: boolean
+  account?: string
+  library?: Web3Provider
 }): T {
-  const {
-    library: activeLibrary,
-    account: activeAccount,
-    chainId,
-    simpleRpcProvider,
-  } = useActiveWeb3React();
+  const { library: activeLibrary, account: activeAccount, chainId, simpleRpcProvider } = useActiveWeb3React()
 
   return useMemo(() => {
-    return getContract(
-      contract,
-      withSignerIfPossible
-        ? getProviderOrSigner(
-            library ?? activeLibrary,
-            account ?? activeAccount
-          )
-        : simpleRpcProvider
-    );
-  }, [
-    contract,
-    chainId,
-    withSignerIfPossible,
-    library,
-    activeLibrary,
-    account,
-    activeAccount,
-    simpleRpcProvider,
-  ]) as T;
+    const providerOrSigner = withSignerIfPossible
+      ? getProviderOrSigner(library ?? (activeLibrary as Web3Provider), account ?? activeAccount)
+      : simpleRpcProvider
+    if (!providerOrSigner) throw new WalletProviderError('Unable to get provider')
+    return getContract(contract, providerOrSigner)
+  }, [contract, chainId, withSignerIfPossible, library, activeLibrary, account, activeAccount, simpleRpcProvider]) as T
 }
