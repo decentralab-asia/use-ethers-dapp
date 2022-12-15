@@ -10,6 +10,15 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@aragon/provided-connector@^6.0.8":
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/@aragon/provided-connector/-/provided-connector-6.0.8.tgz#5d22ccb2a0ff599fbe6c23fdf96cb06d59ff2716"
+  integrity sha512-O7dPXPPwOulkF5Nc04nTEBQPtDmySRPtZW0SYQlX0CwjSAntfdyLjFr6T3bNFFqLCBKfDoW6Hc02fN+rClQGIg==
+  dependencies:
+    "@web3-react/abstract-connector" "^6.0.7"
+    "@web3-react/types" "^6.0.7"
+    tiny-warning "^1.0.3"
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"

@@ -1,6 +1,6 @@
 {
   "name": "use-ethers-dapp",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Use Ethers Dapp",
   "author": "andoan.eth",
   "license": "MIT",
@@ -59,6 +59,7 @@
     "react-dom": "^16.13.1 || ^17"
   },
   "dependencies": {
+    "@aragon/provided-connector": "^6.0.8",
     "@typescript-eslint/parser": "^4.1.0",
     "@web3-react/core": "6.1.9",
     "@web3-react/injected-connector": "6.0.7",
