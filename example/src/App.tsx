@@ -1,12 +1,17 @@
+import Balance from 'Balance'
 import { useState } from 'react'
+import { useBalance } from 'use-ethers-dapp'
 
 import { useWallet } from 'use-ethers-dapp'
 
 function App() {
   const [count, setCount] = useState(0)
   const { isConnected, account, connect, disconnect, error } = useWallet()
+  const balances = useBalance({
+    tokenAddresses: ['0x6B175474E89094C44Da98b954EedeAC495271d0F']
+  })
 
-  console.log('error', error?.message)
+  if (error) return <div>Error: {error.message}</div>
 
   return !isConnected ? (
     <div>
@@ -17,6 +22,9 @@ function App() {
     <div>
       {account}
       <button onClick={disconnect}>Disconnect</button>
+      <div>
+        <Balance balances={balances} />
+      </div>
     </div>
   )
 }

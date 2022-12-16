@@ -28,7 +28,6 @@ export const useBalance = ({
   const multicall = useMulticall()
 
   useEffect(() => {
-    // console.log('go again')
     let cancel = false
     const getBalanceNative = async (): Promise<BalanceResult> => {
       const data = await library?.getBalance(account)
@@ -43,14 +42,14 @@ export const useBalance = ({
       const decimalCalls = _tokenAddresses.map(address => ({
         address,
         name: 'decimals',
-        params: [account]
+        params: []
       }))
       return (await multicall)(ERC20_ABI, [...balanceCalls, ...decimalCalls]).then(values => {
-        const balanceValues: BigNumber[] = values.slice(0, _tokenAddresses.length)
-        const decimalValues: BigNumber[] = values.slice(-_tokenAddresses.length)
+        const balanceValues: [BigNumber][] = values.slice(0, _tokenAddresses.length)
+        const decimalValues: [BigNumber][] = values.slice(-_tokenAddresses.length)
         return _tokenAddresses.map((address, i) => ({
           asset: address,
-          balance: Number(formatUnits(balanceValues[i], decimalValues[i].toNumber()))
+          balance: Number(formatUnits(balanceValues[i][0], decimalValues[i][0]))
         }))
       })
     }
@@ -60,6 +59,7 @@ export const useBalance = ({
         async request() {
           if (!account) return
           if (!tokenAddresses) return [await getBalanceNative()]
+          console.log('Polling balance')
           return [await getBalanceNative(), ...(await getTokenBalances(tokenAddresses))]
         },
         onResult(results?: BalanceResult[]) {
@@ -82,7 +82,7 @@ export const useBalance = ({
       stopPollingBalance()
       setBalances({})
     }
-  }, [account, setBalances, library])
+  }, [account])
   return balances
 }
 

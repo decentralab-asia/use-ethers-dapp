@@ -6,6 +6,7 @@ import useActiveWeb3React, { ActiveWeb3ReactProvider } from './useActiveWeb3Reac
 import useWallet, { WalletProvider } from './useWallet'
 import { useContract, useSimpleContract } from './useContract'
 import { useMulticall } from './useMulticall'
+import useBalance from './useBalance'
 import * as types from './types'
 
 function getLibrary(provider?: any) {
@@ -65,4 +66,4 @@ const DappProvider = ({
   // )
 }
 
-export { DappProvider, useWallet, useActiveWeb3React, useContract, useSimpleContract, useMulticall, types }
+export { DappProvider, useWallet, useActiveWeb3React, useContract, useSimpleContract, useMulticall, useBalance, types }
