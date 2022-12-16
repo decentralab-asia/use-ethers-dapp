@@ -10,7 +10,8 @@ function App() {
 
   return !isConnected ? (
     <div>
-      <button onClick={() => connect('walletconnect')}>Connect</button>
+      <button onClick={() => connect('injected')}>Connect Metamask</button>
+      <button onClick={() => connect('walletconnect')}>Connect Wallect Connect</button>
     </div>
   ) : (
     <div>
