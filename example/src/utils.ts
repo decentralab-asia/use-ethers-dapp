@@ -1,0 +1,1 @@
+export const USDT = '0x5aFE821AC5FabCaAD8c47Ebd7fdF475857FD3287'

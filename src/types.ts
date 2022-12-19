@@ -84,6 +84,13 @@ export interface ContractInfo {
   abi: any
 }
 
+export interface ConfirmationInfo {
+  txHash: string
+  txLink: string
+  status: number | undefined
+  confirmations: number
+}
+
 export interface MultiCall {
   address: string // Address of the contract
   name: string // Function name on the contract (example: balanceOf)

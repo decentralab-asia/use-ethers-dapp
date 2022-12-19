@@ -11,8 +11,6 @@ import { useContract, useSimpleContract } from './useContract'
 import { useMulticall } from './useMulticall'
 import useTransactionListnener from './useTransactionListnener'
 import useBalance from './useBalance'
-import * as types from './types'
-import * as errors from './errors'
 
 function getLibrary(provider?: any) {
   const library = new Web3Provider(
@@ -70,7 +68,8 @@ const DappProvider = ({
   //   </Web3ReactProvider>
   // )
 }
-
+export * from './types'
+export * from './errors'
 export {
   DappProvider,
   useWallet,
@@ -80,8 +79,6 @@ export {
   useTransactionListnener,
   useMulticall,
   useBalance,
-  types,
-  errors,
   SUPPORTED_WALLETS,
   NATIVE_CURRENCIES,
   CHAINS,

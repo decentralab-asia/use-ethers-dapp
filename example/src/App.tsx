@@ -1,4 +1,5 @@
 import Balance from 'Balance'
+import { USDT } from 'utils'
 import { useState } from 'react'
 import { useBalance, useWallet } from 'use-ethers-dapp'
 
@@ -6,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0)
   const { isConnected, account, connect, disconnect, error } = useWallet()
   const balances = useBalance({
-    tokenAddresses: ['0x6B175474E89094C44Da98b954EedeAC495271d0F']
+    tokenAddresses: [USDT]
   })
 
   if (error) return <div>Error: {error.message}</div>

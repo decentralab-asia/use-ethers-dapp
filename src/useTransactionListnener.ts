@@ -4,14 +4,8 @@ import { useCallback, useRef } from 'react'
 import { pollEvery } from './utils/pollEvery'
 
 import useActiveWeb3React from './useActiveWeb3React'
-import { TransactionError } from 'errors'
-
-type ConfirmationInfo = {
-  txHash: string
-  txLink: string
-  status: number | undefined
-  confirmations: number
-}
+import { TransactionError } from './errors'
+import { ConfirmationInfo } from './types'
 
 const useTransactionListener = () => {
   const { library, chainInfo } = useActiveWeb3React()
@@ -25,9 +19,11 @@ const useTransactionListener = () => {
         const pollChecking = pollEvery(
           (txHash: string) => ({
             request: async () => {
-              return await library.getTransactionReceipt(txHash)
+              const result = await library.getTransactionReceipt(txHash)
+              return result
             },
-            onResult: (result: TransactionReceipt) => {
+            onResult: (result?: TransactionReceipt) => {
+              if (!result) return
               if (result.status === 0) {
                 reject(new TransactionError('Transaction failed', txHash))
                 if (_stopPollingConfirmations.current) _stopPollingConfirmations.current()

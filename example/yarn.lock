@@ -1912,10 +1912,10 @@ update-browserslist-db@^1.0.9:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
-use-ethers-dapp@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/use-ethers-dapp/-/use-ethers-dapp-0.3.1.tgz#c9bad1cfe9da79dfec9ad3b5861fc7b3caa7f51d"
-  integrity sha512-S68JbSiJIYAQnQVNQtrsms0DmqN6k0VbO0dMHxw0bDodCrd+8ucjFZ4g1DBRqlWF5oOg8DvVsRuG3u3hh4BWUA==
+use-ethers-dapp@0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/use-ethers-dapp/-/use-ethers-dapp-0.3.4.tgz#5398261843baa5a83519c1fab39502d396a6b12a"
+  integrity sha512-yjC//NbucLE1FqaubzAzglX/bxq6siT9lrlS1eEWE1UUsRb1/pxOlu4xiBJxxfO3D8RguDahaupp2H757wj/pg==
   dependencies:
     "@aragon/provided-connector" "^6.0.8"
     "@typescript-eslint/parser" "^4.1.0"
