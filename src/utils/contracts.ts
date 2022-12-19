@@ -6,14 +6,10 @@ import { AddressZero } from '@ethersproject/constants'
 // Imports below migrated from Exchange useContract.ts
 import { Contract } from '@ethersproject/contracts'
 import { Provider, Web3Provider } from '@ethersproject/providers'
+import { ContractInfo } from '../types'
 import MULTICALL_ABI from '../abis/Multicall'
 
-import { BSC_MAINNET, BSC_TESTNET, ETHEREUM, GOERLI, MUMBAI_TESTNET, POLYGON_MAINNET } from './chains'
-
-export interface ContractInfo {
-  address: string
-  abi: any
-}
+import { BSC_MAINNET, BSC_TESTNET, GOERLI, MUMBAI_TESTNET, POLYGON_MAINNET } from './chains'
 
 export function isAddress(value: any): string | false {
   try {
@@ -71,19 +67,4 @@ export const getResultFromReceipt = (receipt: TransactionReceipt, contract: Cont
   const data = contract.interface.parseLog(log)
   if (!data?.args.length) return null
   return data.args
-}
-
-export const BLOCK_WAITING_SECONDS: {
-  [key: number]: number
-} = {
-  [ETHEREUM]: 30,
-  [POLYGON_MAINNET]: 6,
-  [BSC_MAINNET]: 6,
-  [GOERLI]: 30,
-  [BSC_TESTNET]: 6,
-  [MUMBAI_TESTNET]: 6
-}
-
-export const getDelayTime = (chainId: number) => {
-  return (BLOCK_WAITING_SECONDS[chainId] ?? 6) * 1000
 }

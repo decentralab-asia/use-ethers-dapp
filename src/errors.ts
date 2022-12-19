@@ -31,16 +31,18 @@ export class ConnectionRejectedError extends Error {
 }
 
 export class ConnectorConfigError extends Error {
-  constructor(...params: any[]) {
+  constructor(message: string, ...params: any[]) {
     super(...params)
     this.name = 'ConnectorConfigError'
+    this.message = message
   }
 }
 
 export class NetworkChangedError extends Error {
-  constructor(...params: any[]) {
+  constructor(message: string, ...params: any[]) {
     super(...params)
     this.name = 'NetworkChangedError'
+    this.message = message
   }
 }
 
@@ -49,5 +51,15 @@ export class WalletProviderError extends Error {
     super(...params)
     this.name = 'WalletProviderError'
     this.message = message
+  }
+}
+
+export class TransactionError extends Error {
+  hash: string
+  constructor(message: string, hash: string, ...params: any[]) {
+    super(...params)
+    this.name = 'TransactionError'
+    this.message = message
+    this.hash = hash
   }
 }

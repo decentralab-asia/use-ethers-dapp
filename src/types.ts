@@ -24,6 +24,7 @@ export interface Wallet {
   account: string | null | undefined
   connect: (connectorName: ConnectorName) => Promise<void>
   disconnect: () => void
+  signMessage: (message: string) => void
   connector: string | null
   error: Error | null
   status: Status
@@ -72,6 +73,15 @@ export interface ActiveWeb3React {
   deactivate: () => void
   switchChain: (chainId: number) => Promise<boolean>
   simpleRpcProvider: StaticJsonRpcProvider
+}
+
+export interface Balances {
+  $NATIVE: number | undefined
+  [key: string]: number | undefined
+}
+export interface ContractInfo {
+  address: string
+  abi: any
 }
 
 export interface MultiCall {

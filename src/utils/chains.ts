@@ -1,13 +1,13 @@
 import { Chain, NativeCurrency } from 'types'
 
-export const ETHEREUM = 1
-export const BSC_MAINNET = 56
-export const POLYGON_MAINNET = 137
-export const GOERLI = 5
-export const BSC_TESTNET = 97
-export const MUMBAI_TESTNET = 80001
+const ETHEREUM = 1
+const BSC_MAINNET = 56
+const POLYGON_MAINNET = 137
+const GOERLI = 5
+const BSC_TESTNET = 97
+const MUMBAI_TESTNET = 80001
 
-export const NATIVE_CURRENCIES: { [key: string]: NativeCurrency } = {
+const NATIVE_CURRENCIES: { [key: string]: NativeCurrency } = {
   ETH: {
     name: 'ETH',
     symbol: 'ETH',
@@ -25,7 +25,7 @@ export const NATIVE_CURRENCIES: { [key: string]: NativeCurrency } = {
   }
 }
 
-export const CHAINS: { [key: number]: Chain } = {
+const CHAINS: { [key: number]: Chain } = {
   [ETHEREUM]: {
     chainId: `0x${ETHEREUM.toString(16)}`,
     chainName: 'Ethereum Mainnet',
@@ -88,9 +88,21 @@ export const CHAINS: { [key: number]: Chain } = {
   }
 }
 
-export const getChainMetadata = (chainId: number, rpcUrls?: string[]) => {
+const getChainMetadata = (chainId: number, rpcUrls?: string[]) => {
   const chain = CHAINS[chainId]
   if (!chain) throw Error('Unknown chainId')
   if (rpcUrls) return { ...chain, rpcUrls }
   return chain
+}
+
+export {
+  ETHEREUM,
+  BSC_MAINNET,
+  POLYGON_MAINNET,
+  GOERLI,
+  BSC_TESTNET,
+  MUMBAI_TESTNET,
+  NATIVE_CURRENCIES,
+  CHAINS,
+  getChainMetadata
 }

@@ -13,6 +13,7 @@ import {
 } from './utils/storage'
 import { ChainUnsupportedError, ConnectorUnsupportedError } from './errors'
 import { getWalletProviderFromConnector } from './utils/providers'
+import { sign } from './utils/wallet'
 
 export const WalletContext = createContext<Wallet | null>(null)
 
@@ -45,7 +46,7 @@ export function WalletProvider({
   const activationId = useRef<number>(0)
 
   const connectors = useMemo(() => getConnectors(connectorsInitsOrConfigs), [connectorsInitsOrConfigs])
-  const { account, active, activate, deactivate, error: web3Error, chainId } = useActiveWeb3React()
+  const { account, library, active, activate, deactivate, error: web3Error, chainId } = useActiveWeb3React()
 
   const disconnect = useCallback(() => {
     if (active) deactivate && deactivate()
@@ -136,11 +137,20 @@ export function WalletProvider({
     },
     [activate, chainId]
   )
+  const signMessage = useCallback(
+    (message: string) => {
+      if (!account) return
+      sign(account, message, library)
+    },
+    [account, library]
+  )
+
   const contextValue = useMemo(() => {
     return {
       account,
       connect,
       disconnect,
+      signMessage,
       connector,
       error,
       status,

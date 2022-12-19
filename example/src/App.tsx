@@ -1,8 +1,6 @@
 import Balance from 'Balance'
 import { useState } from 'react'
-import { useBalance } from 'use-ethers-dapp'
-
-import { useWallet } from 'use-ethers-dapp'
+import { useBalance, useWallet } from 'use-ethers-dapp'
 
 function App() {
   const [count, setCount] = useState(0)

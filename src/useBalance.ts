@@ -6,10 +6,7 @@ import { useMulticall } from './useMulticall'
 import useActiveWeb3React from './useActiveWeb3React'
 
 import { pollEvery } from './utils/pollEvery'
-
-interface Balance {
-  [key: string]: number | undefined
-}
+import { Balances } from 'types'
 
 interface BalanceResult {
   asset: string
@@ -23,7 +20,7 @@ export const useBalance = ({
   tokenAddresses?: string[]
   pollingDuration?: number
 }) => {
-  const [balances, setBalances] = useState<Balance>({})
+  const [balances, setBalances] = useState<Balances>({ $NATIVE: undefined })
   const { account, library } = useActiveWeb3React()
   const multicall = useMulticall()
 
@@ -54,7 +51,7 @@ export const useBalance = ({
       })
     }
     // Poll wallet balance
-    const pollBalance = pollEvery((onUpdate: (balance: Balance) => void) => {
+    const pollBalance = pollEvery((onUpdate: (balance: Balances) => void) => {
       return {
         async request() {
           if (!account) return
@@ -68,7 +65,7 @@ export const useBalance = ({
             results.reduce((prev, cur) => {
               prev[cur.asset] = cur.balance
               return prev
-            }, {} as Balance)
+            }, {} as Balances)
           )
         }
       }
@@ -80,7 +77,9 @@ export const useBalance = ({
     return () => {
       cancel = true
       stopPollingBalance()
-      setBalances({})
+      setBalances({
+        $NATIVE: undefined
+      })
     }
   }, [account])
   return balances

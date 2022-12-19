@@ -1,6 +1,6 @@
 {
   "name": "use-ethers-dapp",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Use Ethers Dapp",
   "author": "andoan.eth",
   "license": "MIT",
@@ -30,6 +30,7 @@
     "@types/node": "^18.11.15",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
+    "ethers": "^5.6.4",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@web3-react/abstract-connector": "6.0.7",
     "@web3-react/types": "6.0.7",
@@ -56,7 +57,8 @@
   },
   "peerDependencies": {
     "react": "^16.13.1 || ^17",
-    "react-dom": "^16.13.1 || ^17"
+    "react-dom": "^16.13.1 || ^17",
+    "ethers": "^5.6.4"
   },
   "dependencies": {
     "@aragon/provided-connector": "^6.0.8",
@@ -64,7 +66,6 @@
     "@web3-react/core": "6.1.9",
     "@web3-react/injected-connector": "6.0.7",
     "@web3-react/walletconnect-connector": "6.2.13",
-    "ethers": "^5.6.4",
     "lodash.sample": "^4.2.1",
     "regenerator-runtime": "^0.13.7"
   }

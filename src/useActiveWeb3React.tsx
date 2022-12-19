@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { ActiveWeb3React } from 'types'
+import { ActiveWeb3React } from './types'
 
 /**
  * Provides a web3 provider with or without user's signer
@@ -57,15 +57,12 @@ export function ActiveWeb3ReactProvider({
     }
   }, [library, simpleRpcProvider])
 
-  const switchChain = useCallback(
-    async (_chainId: number): Promise<boolean> => {
-      if (chainId === _chainId) return true
-      const provider = library?.provider ? library.provider : library
-      if (!provider?.request) return false
-      return setupNetwork(_chainId, provider, rpcUrls)
-    },
-    [chainId, library]
-  )
+  const switchChain = useCallback(async (): Promise<boolean> => {
+    if (chainId === defaultChainId) return true
+    const provider = library?.provider ? library.provider : library
+    if (!provider?.request) return false
+    return setupNetwork(defaultChainId, provider, rpcUrls)
+  }, [chainId, library])
 
   const contextValue = useMemo(
     () => ({
